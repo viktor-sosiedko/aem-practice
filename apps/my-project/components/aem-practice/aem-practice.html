@@ -1,0 +1,30 @@
+<sly data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}"/>
+<sly data-sly-call="${clientLib.css @ categories='aem-practice'}"/>
+
+<sly data-sly-use.model="com.task.model.AemPracticeModel"/>
+<sly data-sly-test.author="${wcmmode.edit || wcmmode.design}"/>
+
+<div class="aem-practice">
+    <img data-sly-test="${model.isBackgroundImage && model.imagePath && !author}"
+         class="aem-practice-bg-image" src="${model.imagePath}"/>
+    <h3 data-sly-test="${model.title}" class="aem-practice-title">${model.title}</h3>
+    <div class="aem-practice-nav-items" data-sly-list="${model.navigationItems}">
+        <b data-sly-unwrap="${!itemList.first}">
+            <i data-sly-unwrap="${!itemList.last}">
+                <a class="aem-practice-nav-item" href="${item.path}">${item.title}</a>
+            </i>
+        </b>
+<!--        <b data-sly-test="${itemList.first}">-->
+<!--            <a class="aem-practice-nav-item" href="${item.path}">${item.title}</a>-->
+<!--        </b>-->
+<!--        <i data-sly-test="${itemList.last}">-->
+<!--            <a class="aem-practice-nav-item" href="${item.path}">${item.title}</a>-->
+<!--        </i>-->
+<!--        <a data-sly-test="${!itemList.first && !itemList.last}"-->
+<!--           class="aem-practice-nav-item" href="${item.path}">${item.title}</a>-->
+    </div>
+    <div data-sly-test="${author}">Author Mode</div>
+    <div class="aem-practice-page-link">
+        <a href="${currentPage.path}">${currentPage.title}</a>
+    </div>
+</div>
